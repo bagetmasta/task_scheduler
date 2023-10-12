@@ -1,10 +1,11 @@
+
+import { ListGroup, Alert } from "react-bootstrap";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Task } from "components/Task/Task";
 import { getTasks, getStatusFilter } from "redux/selectors";
 import { statusFilters } from "redux/constants";
 import { Modal } from "components/Modal/Modal";
-import css from "./TaskList.module.css";
 
 const getVisibleTasks = (tasks, statusFilter) => {
   const sortedTasks = [...tasks].sort((a, b) =>
@@ -48,19 +49,21 @@ export const TaskList = () => {
         />
       )}
       {visibleTasks.length === 0 ? (
-        <p className={css.emptyMessage}>No tasks available yet.</p>
+        <Alert variant="info">No tasks available yet.</Alert>
       ) : (
-        <ul className={css.list}>
+        <ListGroup>
           {visibleTasks.map((task) => (
-            <li
-              className={css.listItem}
+            <ListGroup.Item
               key={task.id}
               onClick={() => handleEditTask(task)}
+              role="button"
+              tabIndex={0}
+              className="list-group-item-action"
             >
               <Task task={task} />
-            </li>
+            </ListGroup.Item>
           ))}
-        </ul>
+        </ListGroup>
       )}
     </div>
   );

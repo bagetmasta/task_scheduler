@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
-import { MdClose } from "react-icons/md";
 import css from "./Task.module.css";
+import { useDispatch } from "react-redux";
+import { Button, Card, Form } from "react-bootstrap";
 import { deleteTask, toggleFinished } from "redux/tasksSlice";
 
 export const Task = ({ task }) => {
@@ -10,27 +10,32 @@ export const Task = ({ task }) => {
   const handleToggle = () => dispatch(toggleFinished(task.id));
 
   return (
-    <div className={css.card}>
-      <div className={css.cardHeader}>
-        <h3 className={css.title}>{task.title}</h3>
-        <button
-          className={css.btn}
-          onClick={(e) => {
-            handleDelete();
-            e.stopPropagation();
-          }}
-        >
-          <MdClose size={24} />
-        </button>
-      </div>
-      <p className={css.description}>{task.description}</p>
-      <input
-        type="checkbox"
-        className={css.checkbox}
-        checked={task.finished}
-        onChange={handleToggle}
-        onClick={(e) => e.stopPropagation()}
-      />
-    </div>
+    <Card>
+      <Card.Header>
+        <div className="d-flex justify-content-between">
+          <Card.Title>{task.title}</Card.Title>
+          <Button
+            variant="danger"
+            size="sm"
+            onClick={(e) => {
+              handleDelete();
+              e.stopPropagation();
+            }}
+          >
+            &times;
+          </Button>
+        </div>
+      </Card.Header>
+      <Card.Body>
+        <Card.Text>{task.description}</Card.Text>
+        <Form.Check
+          type="checkbox"
+          label="Finished"
+          checked={task.finished}
+          onChange={handleToggle}
+          onClick={(e) => e.stopPropagation()}
+        />
+      </Card.Body>
+    </Card>
   );
 };
