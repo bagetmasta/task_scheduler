@@ -2,19 +2,19 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const tasksInitialState = [
   {
-    id: 0,
+    id: nanoid(),
     title: "Test assignment",
     description: "Complete the test task from VIATEC.",
     finished: true,
   },
   {
-    id: 1,
+    id: nanoid(),
     title: "Prepare soup",
     description: "The recipe is in the notes.",
     finished: false,
   },
   {
-    id: 2,
+    id: nanoid(),
     title: "Feed the dog",
     description: "She likes oatmeal flakes.",
     finished: false,
@@ -27,7 +27,7 @@ const tasksSlice = createSlice({
   reducers: {
     addTask: {
       reducer(state, action) {
-        state.push(action.payload);
+        state.unshift(action.payload);
       },
       prepare(taskData) {
         return {
