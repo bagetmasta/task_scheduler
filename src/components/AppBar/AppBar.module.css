@@ -1,0 +1,31 @@
+.header_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.section_wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: 375px) {
+    flex-direction: column;
+  }
+}
+
+.section {
+  display: grid;
+  gap: 4px;
+}
+
+.section:not(:last-child) {
+  @media screen and (max-width: 375px) {
+    margin-bottom: 20px;
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+}

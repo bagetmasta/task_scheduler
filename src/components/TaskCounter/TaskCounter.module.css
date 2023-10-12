@@ -1,0 +1,7 @@
+.text {
+  margin: 0;
+}
+
+.text:not(:last-child) {
+  margin-bottom: 5px;
+}
