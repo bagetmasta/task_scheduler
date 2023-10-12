@@ -8,6 +8,7 @@ Main features:
 - Interactive buttons to manage each task.
 - Modal windows for editing and adding tasks.
 - Intuitive user interface using react-bootstrap.
+- The Notiflix library is used for notifications.
 
 ---
 
