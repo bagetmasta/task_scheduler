@@ -1,4 +1,5 @@
 import css from "./Modal.module.css";
+import Notiflix from "notiflix";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { addTask, updateTask } from "redux/tasksSlice";
@@ -7,15 +8,24 @@ export const Modal = ({ onClose, isModalOpen, editingTask }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.keyCode === 27 && isModalOpen) {
+        onClose();
+      }
+    };
+
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
     } else {
       document.body.style.overflow = "auto";
     }
+
     return () => {
       document.body.style.overflow = "auto";
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isModalOpen]);
+  }, [isModalOpen, onClose]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,7 +37,7 @@ export const Modal = ({ onClose, isModalOpen, editingTask }) => {
         ?.value === "Finished";
 
     if (!title) {
-      alert("Title cannot be empty!");
+      Notiflix.Notify.failure("Title cannot be empty!");
       return;
     }
 
@@ -37,6 +47,7 @@ export const Modal = ({ onClose, isModalOpen, editingTask }) => {
       );
     } else {
       dispatch(addTask({ title, description, finished }));
+      Notiflix.Notify.success("Task has been added!");
     }
 
     onClose();
