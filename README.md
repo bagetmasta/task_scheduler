@@ -10,6 +10,10 @@ Main features:
 - Intuitive user interface using react-bootstrap.
 - The Notiflix library is used for notifications.
 
+# Deployment
+
+The project is deployed on Vercel. You can access the live application [here](https://task-scheduler-ab.vercel.app/).
+
 ---
 
 To initialize and locally run the project, follow these steps:
